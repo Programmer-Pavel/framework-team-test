@@ -1,0 +1,12 @@
+.mainLayoutWrapper {
+  height: 100%;
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 0;
+}

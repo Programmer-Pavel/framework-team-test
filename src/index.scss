@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  font-family: 'Roboto', sans-serif;
+
+  --background: white;
+  --color: #000;
+  --icon-color: none;
+
+  // pagination
+  --disabled: rgba(0, 0, 0, 0.3);
+  --page-hover-background: #ededed;
+  --disabled-hover-background: #fff;
+  --current-page-color: #fff;
+
+  // select
+  --border-bottom: rgba(0, 0, 0, 0.3);
+  --select-bar-background: #fff;
+  --option-color: #fff;
+  --select-input-background: #efefef;
+
+  // input
+  --input-background: #fff;
+  --input-placeholder: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] {
+  --background: black;
+  --color: #fff;
+  --icon-color: invert(100%) sepia(0%) saturate(7500%) hue-rotate(286deg)
+    brightness(107%) contrast(105%);
+
+  // pagination
+  --disabled: rgba(255, 255, 255, 0.3);
+  --page-hover-background: #464646;
+  --disabled-hover-background: #000;
+  --current-page-color: #000;
+
+  // select
+  --border-bottom: rgba(255, 255, 255, 0.3);
+  --select-bar-background: #000;
+  --option-color: #000;
+  --select-input-background: #fff;
+
+  // input
+  --input-background: #000;
+  --input-placeholder: rgba(255, 255, 255, 0.3);
+}
+
+.container {
+  height: 100%;
+  max-width: 1120px;
+  margin: 0 20px;
+
+  @media screen and (min-width: 768px) {
+    margin: 0 34px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin: 0 42px;
+  }
+
+  @media screen and (min-width: 1366px) {
+    margin: 0 auto;
+  }
+}
