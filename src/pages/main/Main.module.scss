@@ -19,6 +19,15 @@
   margin-bottom: 30px;
 }
 
+.emptyListText {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color);
+}
+
 @media screen and (min-width: 768px) {
   .wrapper {
     padding-bottom: 54px;

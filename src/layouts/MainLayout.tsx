@@ -26,7 +26,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
             <img src={darkIcon} alt='' onClick={switchTheme} />
           )}
         </header>
-        <main>{children}</main>
+        {children}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useDeferredValue, useState } from 'react';
+import { useState } from 'react';
 import styles from './Main.module.scss';
 import Card from '../../components/ui-kit/card/Card';
 import Pagination from '../../components/ui-kit/pagination/Pagination';
@@ -9,6 +9,7 @@ import useGetLocations from '../../api/locations';
 import Input from '../../components/ui-kit/input/Input';
 import Select from '../../components/ui-kit/select/Select';
 import SelectFromBefore from '../../components/ui-kit/selectFromBefore/SelectFromBefore';
+import useDebounce from '../../hooks/useDebounce';
 
 const LIMIT = 12;
 
@@ -22,9 +23,9 @@ const Main = () => {
     before: string;
   }>({ from: '', before: '' });
 
-  const deferredName = useDeferredValue(name);
-  const deferredCreatedFrom = useDeferredValue(created.from);
-  const deferredCreatedBefore = useDeferredValue(created.before);
+  const debouncedName = useDebounce<string>(name, 500);
+  const debouncedCreatedFrom = useDebounce<string>(created.from, 500);
+  const debouncedCreatedBefore = useDebounce<string>(created.before, 500);
 
   const { data: authors } = useGetAuthors();
   const { data: locations } = useGetLocations();
@@ -34,26 +35,26 @@ const Main = () => {
     LIMIT,
     author,
     location,
-    deferredName,
-    deferredCreatedFrom,
-    deferredCreatedBefore
+    debouncedName,
+    debouncedCreatedFrom,
+    debouncedCreatedBefore
   );
 
   const { data: paintingsAll } = useGetPaintingsAll(
     author,
     location,
-    deferredName,
-    deferredCreatedFrom,
-    deferredCreatedBefore
+    debouncedName,
+    debouncedCreatedFrom,
+    debouncedCreatedBefore
   );
 
   return (
     <MainLayout>
-      <div className={styles.wrapper}>
+      <main className={styles.wrapper}>
         <div className={styles.filters}>
           <Input
             placeholder='Name'
-            value={deferredName}
+            value={name}
             onChange={e => setName(e.target.value)}
           />
           <Select
@@ -75,9 +76,13 @@ const Main = () => {
           />
         </div>
 
-        <div className={styles.cardGroup}>
-          {paintings?.map(item => <Card key={item.id} data={item} />)}
-        </div>
+        {paintings?.length ? (
+          <div className={styles.cardGroup}>
+            {paintings?.map(item => <Card key={item.id} data={item} />)}
+          </div>
+        ) : (
+          <div className={styles.emptyListText}>Список пустой!</div>
+        )}
 
         {paintingsAll?.length ? (
           <Pagination
@@ -87,7 +92,7 @@ const Main = () => {
             setCurrentPage={setCurrentPage}
           />
         ) : null}
-      </div>
+      </main>
     </MainLayout>
   );
 };

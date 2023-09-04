@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import styles from './Pagination.module.scss';
 import arrowLeftIcon from '../../../assets/icons/arrow-left.svg';
 import doubleaArrowLeftIcon from '../../../assets/icons/double-arrow-left.svg';
@@ -14,6 +14,10 @@ const Pagination = ({
   currentPage: number;
   setCurrentPage: (value: number) => void;
 }) => {
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [setCurrentPage, total]);
+
   // общее количество кнопок страниц
   const pages = useMemo(() => {
     const count = Math.ceil(total / itemsPerPage);
